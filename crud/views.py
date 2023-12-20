@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from rest_framework.parsers import JSONParser
 from crud.serializers import StudentSerializers
 from crud.models import Student
 from django.http import JsonResponse, HttpResponse
@@ -8,12 +7,15 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import generics, mixins
 
+from rest_framework.reverse import reverse
+
+
 # Create your views here.
 #class Student_api_list(mixins.ListModelMixin,mixins.CreateModelMixin): or use (generics.ListCreateAPIView)
 class Student_api_list(generics.ListCreateAPIView):
     queryset=Student.objects.all()
     serializer_class = StudentSerializers
-
+    
     def get(self, request):
         return self.list(request)
 
